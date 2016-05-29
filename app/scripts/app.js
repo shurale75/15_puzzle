@@ -16,7 +16,8 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-        'timer'
+        'timer',
+        'ngStorage'
     ])
     .config(function ($routeProvider) {
 
@@ -26,10 +27,10 @@ angular
                 controller: 'MainCtrl',
                 controllerAs: 'main'
             })
-            .when('/about', {
-                templateUrl: 'views/about.html',
-                controller: 'AboutCtrl',
-                controllerAs: 'about'
+            .when('/scores', {
+                templateUrl: 'views/scores.html',
+                controller: 'ScoresCtrl',
+                controllerAs: 'scores'
             })
             .otherwise({
                 redirectTo: '/'

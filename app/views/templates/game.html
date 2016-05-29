@@ -1,4 +1,11 @@
 <div>
     <button ng-click="shuffle()">New game</button>
+    <h4 style="display:inline">
+        <timer interval="1" autoStart="false">{{hours}} : {{minutes}} : {{seconds}} : {{millis}}</timer>
+    </h4>
+    <button data-ng-click="startTimer('basic-timer')" type="button">Start</button>
+    <button data-ng-click="stopTimer('basic-timer')" type="button">Stop</button>
+    <button data-ng-click="resetTimer('basic-timer')" type="button">Reset</button>
+
     <div id="puzzle" input-api></div>
 </div>

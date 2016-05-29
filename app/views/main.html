@@ -1,5 +1,8 @@
 <div>
-
+  <select name="gameSizes" id="gameSizes"
+          ng-change="sizeChange()"
+          ng-options="option.name for option in gameSizes.availableSizes track by option.val"
+          ng-model="gameSizes.sizeSelected"></select>
 
   <puzzle-game></puzzle-game>
 

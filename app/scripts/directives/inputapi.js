@@ -7,11 +7,11 @@
  * # inputapi
  */
 angular.module('15PuzzleApp')
-    .directive('inputApi', function ($window) {
+    .directive('inputApi', function ($window, $rootScope) {
         return {
             restrict: 'A',
             link: function postLink(scope, element, attrs) {
-               angular.element($window).bind('keydown', function(e) {
+                angular.element($window).bind('keydown', function(e) {
                     e.preventDefault();
                     switch (e.keyCode) {
                         case 37:
@@ -30,8 +30,14 @@ angular.module('15PuzzleApp')
                             scope.move('down');
                             e.preventDefault();
                             break;
-                    }
+                    }//end switch
+                });//end keydown
+
+                $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+                    angular.element($window).unbind('keydown');
                 });
-            }
-        };
+
+            }//end link
+        }//end return
     });
+

@@ -9,9 +9,10 @@
  */
 angular.module('15PuzzleApp')
     .controller('gameCtrl', function ($compile, $scope, tools, $filter, $timeout) {
-        $scope.size = 4;
+        console.log('gameCtrl')
+        $scope.gsize = $scope.gameSizes.sizeSelected.val;
         $scope.imgsrc = '/images/image1.jpg';
-        $scope.totalPieces = $scope.size * $scope.size;
+        $scope.totalPieces = $scope.gsize * $scope.gsize;
         $scope.pieces = [];
         $scope.lastIndex = $scope.totalPieces - 1;
 
@@ -28,50 +29,64 @@ angular.module('15PuzzleApp')
                 angular.forEach($scope.pieces, function (p) {
                     angular.element('#puzzle').append(p);
                 });
-                tools.updateAllPositions($scope.pieces, $scope.size);
+                tools.updateAllPositions($scope.pieces, $scope.gsize);
                 //$scope.shuffle();
             }, 100);
 
         }
 
+        $scope.startNewGame = function(){
+            if($scope.timerRunning){
+                $scope.resetTimer();
+                $scope.stopTimer();
+            }
+            $scope.shuffle();
+        }
+
         $scope.shuffle = function() {
-            $scope.pieces = tools.shuffle($scope.pieces, $scope.size);
+            $scope.pieces = tools.shuffle($scope.pieces, $scope.gsize);
             $timeout(function () {
-                tools.updateAllPositions($scope.pieces, $scope.size);
-            }, 300);
+                tools.updateAllPositions($scope.pieces, $scope.gsize);
+            }, 300).then(
+                $timeout(function () {
+                    $scope.startTimer()
+                }, 500)
+            );
         }
 
         $scope.move = function (direction) {
             var nullId = $scope.pieces.indexOf($scope.nullElement);
-            var posMoves = tools.getPossibleMoves(nullId, $scope.size);
-            switch (direction) {
-                case 'up':
-                    if (posMoves.top != nullId) {
-                        tools.swapElements($scope.pieces, nullId, posMoves.top);
-                    }
-                    break;
-                case 'down':
-                    if (posMoves.bot != nullId) {
-                        tools.swapElements($scope.pieces, nullId, posMoves.bot);
-                    }
-                    break;
-                case 'left':
-                    if (posMoves.left != nullId) {
-                        tools.swapElements($scope.pieces, nullId, posMoves.left);
-                    }
-                    break;
-                case 'right':
-                    if (posMoves.right != nullId) {
-                        tools.swapElements($scope.pieces, nullId, posMoves.right);
-                    }
-                    break;
+            var posMoves = tools.getPossibleMoves(nullId, $scope.gsize, direction);
+
+            if (posMoves != nullId) {
+                tools.swapElements($scope.pieces, nullId, posMoves);
             }
 
             $timeout(function () {
-                tools.updateAllPositions($scope.pieces, $scope.size);
-            });
+                tools.updateAllPositions($scope.pieces, $scope.gsize);
+            }, 100);
         }
 
-        $scope.init();
+        $scope.timerRunning = false;
 
+        $scope.startTimer = function (){
+            $scope.$broadcast('timer-start');
+            $scope.timerRunning = true;
+        };
+
+        $scope.stopTimer = function (){
+            $scope.$broadcast('timer-stop');
+            $scope.timerRunning = false;
+        };
+
+        $scope.resetTimer = function(){
+            $scope.$broadcast('timer-reset');
+            $scope.timerRunning = false;
+        }
+
+        $scope.$on('timer-stopped', function (event, data){
+            console.log('Timer Stopped - data = ', data);
+        });
+
+        $scope.init();
     });
