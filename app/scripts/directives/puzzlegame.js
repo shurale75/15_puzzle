@@ -14,7 +14,7 @@ angular.module('15PuzzleApp')
             scope:true,
             link: function postLink(scope) {
                 scope.gsize = parseInt(scope.gameSizes.sizeSelected.val);
-                scope.imgsrc = scope.gamePics.picSelected.val
+                scope.imgsrc = scope.gamePics.picSelected.val;
                 scope.totalPieces = scope.gsize * scope.gsize;
                 scope.pieces = [];
                 scope.lastIndex = scope.totalPieces - 1;
@@ -32,10 +32,10 @@ angular.module('15PuzzleApp')
                         angular.forEach(scope.pieces, function (p) {
                             angular.element('#puzzle').append(p);
                         });
-                        tools.updateAllPositions(scope.pieces, scope.gsize)
+                        tools.updateAllPositions(scope.pieces, scope.gsize);
                     }, 100);
 
-                }
+                };
 
                 scope.startNewGame = function(){
                     if(scope.timerRunning){
@@ -43,7 +43,7 @@ angular.module('15PuzzleApp')
                         scope.stopTimer();
                     }
                     scope.shuffle();
-                }
+                };
 
                 scope.shuffle = function() {
                     scope.pieces = tools.shuffle(scope.pieces, scope.gsize);
@@ -51,16 +51,16 @@ angular.module('15PuzzleApp')
                         tools.updateAllPositions(scope.pieces, scope.gsize);
                     }, 300).then(
                         $timeout(function () {
-                            scope.startTimer()
+                            scope.startTimer();
                         }, 500)
                     );
-                }
+                };
 
                 scope.move = function (direction) {
                     var nullId = scope.pieces.indexOf(scope.nullElement);
                     var posMoves = tools.getPossibleMoves(nullId, scope.gsize, direction);
 
-                    if (posMoves != nullId) {
+                    if (posMoves !== nullId) {
                         tools.swapElements(scope.pieces, nullId, posMoves);
                     }
 
@@ -70,7 +70,7 @@ angular.module('15PuzzleApp')
                             scope.stopTimer();
                         }
                     });
-                }
+                };
 
 
 
@@ -89,7 +89,7 @@ angular.module('15PuzzleApp')
                 scope.resetTimer = function(){
                     scope.$broadcast('timer-reset');
                     scope.timerRunning = false;
-                }
+                };
 
                 scope.$on('timer-stopped', function (event, data){
                     var scores = $localStorage.scores ? $localStorage.scores : [];

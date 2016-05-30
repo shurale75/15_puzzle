@@ -2,7 +2,7 @@
     <div class="row-spaced">
         <button data-ng-click="shuffle()" style="margin-right: 20px">New game</button>
         <h4 style="display:inline; margin-right: 20px">
-            <timer interval="1" autoStart="false">{{hours}} : {{minutes}} : {{seconds}} : {{millis}}</timer>
+            <timer interval="1" autoStart="false">{{hours}} : {{minutes}} : {{seconds}} : {{millis % 1000}}</timer>
         </h4>
         <!--<button data-ng-click="startTimer('basic-timer')" type="button">Start</button>
         <button data-ng-click="stopTimer('basic-timer')" type="button">Stop</button>

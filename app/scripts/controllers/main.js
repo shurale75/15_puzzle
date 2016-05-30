@@ -9,7 +9,7 @@
  */
 angular.module('15PuzzleApp')
     .controller('MainCtrl', function ($scope, $route, $localStorage) {
-        var defaultSize = ($localStorage.gameSize) ? $localStorage.gameSize : {val: '4', name: '4 x 4'}
+        var defaultSize = ($localStorage.gameSize) ? $localStorage.gameSize : {val: '4', name: '4 x 4'};
         $scope.gameSizes = {
             availableSizes: [
                 {val: '3', name: '3 x 3'},
@@ -23,9 +23,9 @@ angular.module('15PuzzleApp')
         $scope.sizeChange = function(){
             $localStorage.gameSize = $scope.gameSizes.sizeSelected;
             $route.reload();
-        }
+        };
 
-        var defaultPic = ($localStorage.gamePic) ? $localStorage.gamePic : {val: '/images/image1.jpg', name: 'Eagle'}
+        var defaultPic = ($localStorage.gamePic) ? $localStorage.gamePic : {val: '/images/image1.jpg', name: 'Eagle'};
         $scope.gamePics = {
             availablePics: [
                 {val: '/images/image1.jpg', name: 'Eagle'},
@@ -38,5 +38,5 @@ angular.module('15PuzzleApp')
         $scope.picChange = function(){
             $localStorage.gamePic = $scope.gamePics.picSelected;
             $route.reload();
-        }
+        };
     });

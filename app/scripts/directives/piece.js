@@ -14,7 +14,7 @@ angular.module('15PuzzleApp')
             scope: {
                 index: '='
             },
-            link: function postLink(scope, element, attrs) {
+            link: function postLink(scope) {
                 scope.lastIndex = scope.$parent.lastIndex;
             }
         };

@@ -65,12 +65,12 @@ angular.module('15PuzzleApp')
 
             isGameCompleted: function(arr){
                 for(var i=0; i<arr.length; i++){
-                    if(arr[i].id != i){
+                    if(arr[i].id !== i){
                         return false;
                     }
                 }
 
                 return true;
             }
-        }
+        };
     });
