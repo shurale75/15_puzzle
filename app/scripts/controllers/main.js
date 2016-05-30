@@ -21,11 +21,22 @@ angular.module('15PuzzleApp')
         };
 
         $scope.sizeChange = function(){
-            console.log('SIZE CHANGE');
             $localStorage.gameSize = $scope.gameSizes.sizeSelected;
             $route.reload();
         }
 
-        console.log($localStorage);
+        var defaultPic = ($localStorage.gamePic) ? $localStorage.gamePic : {val: '/images/image1.jpg', name: 'Eagle'}
+        $scope.gamePics = {
+            availablePics: [
+                {val: '/images/image1.jpg', name: 'Eagle'},
+                {val: '/images/image2.jpg', name: 'Butterfly'},
+                {val: '/images/image3.jpg', name: 'Flowers'}
+            ],
+            picSelected: defaultPic
+        };
 
+        $scope.picChange = function(){
+            $localStorage.gamePic = $scope.gamePics.picSelected;
+            $route.reload();
+        }
     });

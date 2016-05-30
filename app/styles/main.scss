@@ -10,31 +10,16 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   padding: 0.2em 0;
 }
 
+.row{
+  margin-left: 0;
+  margin-right: 0;
+  &-spaced{margin-bottom: 10px;}
+}
+
+
 body {
   padding: 0;
 }
-
-.puzz-piece {
-  width: 100px;
-  height: 100px;
-  background-color: #8699a4;
-  border: solid;
-  border-color: #5bc0de;
-  position: absolute;
-  display: block;
-
-  transition-duration: 500ms;
-
-}
-
-input {
-  margin: 5px;
-}
-
-#puzzle {
-
-}
-
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,

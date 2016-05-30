@@ -9,7 +9,7 @@
  */
 angular.module('15PuzzleApp')
     .controller('ScoresCtrl', function ($scope, $localStorage) {
-        $scope.testvar = 'testvar >>>>>>>>';
-        $scope.gscores = $localStorage.scores;
-        console.log('ScoresCtrl scores:', $scope.scores)
+        $scope.gscores = ($localStorage.scores) ? $localStorage.scores : [];
+        $scope.orderRule = 'date';
+        $scope.orderDir = false;
     });

@@ -1,9 +1,29 @@
-<div class="header">
-<H2>This is the ten best scores.</H2>
+<div class="row">
+    <H2 class="header">Scores of played games:</H2>
 </div>
 
-<div>
-    <ul>
-        <li data-ng-repeat="score in gscores">{{score}}</li>
-    </ul>
+<div class="row">
+    <table class="table table-striped">
+        <tr>
+            <th data-ng-click="testClick()">
+                <span>Sort by:</span>
+            </th>
+            <th data-ng-click="orderRule = 'date'">
+                    <span>Date</span>
+                    <span class="caret"
+                          data-ng-click="orderDir = !orderDir"
+                          data-ng-style='{"transform":"rotate("+(orderDir?180:0)+"deg)"}'></span>
+            </th>
+            <th data-ng-click="orderRule = 'score.millis'">
+                    <span>Score</span>
+                    <span class="caret" data-ng-click="orderDir = !orderDir"
+                          data-ng-style='{"transform":"rotate("+(orderDir?180:0)+"deg)"}'></span>
+            </th>
+        </tr>
+        <tr data-ng-repeat="score in gscores | orderBy:orderRule:orderDir | limitTo:10">
+            <td></td>
+            <td>{{score.date}}</td>
+            <td>{{score.score.hours}} : {{score.score.minutes}} : {{score.score.seconds}} : {{score.score.millis % 1000}}</td>
+        </tr>
+    </table>
 </div>

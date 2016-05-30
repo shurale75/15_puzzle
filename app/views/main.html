@@ -1,11 +1,23 @@
 <div>
-  <select name="gameSizes" id="gameSizes"
-          ng-change="sizeChange()"
-          ng-options="option.name for option in gameSizes.availableSizes track by option.val"
-          ng-model="gameSizes.sizeSelected"></select>
+    <div class="row-spaced">
+        <label>Game size:</label>
+        <select name="gameSizes" id="gameSizes"
+                data-ng-change="sizeChange()"
+                data-ng-options="option.name for option in gameSizes.availableSizes track by option.val"
+                data-ng-model="gameSizes.sizeSelected">
 
-  <puzzle-game></puzzle-game>
+        </select>
+        <label style="padding-left: 20px">Game picture:</label>
+        <select name="gamePics" id="gamePics"
+                data-ng-change="picChange()"
+                data-ng-options="option.name for option in gamePics.availablePics track by option.val"
+                data-ng-model="gamePics.picSelected">
 
+        </select>
+    </div>
+    <div class="row">
+        <puzzle-game></puzzle-game>
+    </div>
 </div>
 
 

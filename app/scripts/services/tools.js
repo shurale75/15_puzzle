@@ -18,8 +18,6 @@ angular.module('15PuzzleApp')
 
             getPossibleMoves: function (curIndex, size, direct) {
                 var poscor;
-                curIndex = parseInt(curIndex);
-                size = parseInt(size);
 
                 switch (direct) {
                     case 'up':
@@ -45,10 +43,8 @@ angular.module('15PuzzleApp')
                 var n = arr.length;
                 for (var i = 0; i < n; i++) {
                     var el = arr.splice(Math.floor(Math.random() * arr.length), 1)[0];
-                    el.pid = i;
                     tempArray.push(el);
                 }
-
                 return tempArray;
             },
 
@@ -60,13 +56,21 @@ angular.module('15PuzzleApp')
 
             updateElementPosition: function (element, index, size) {
                 var ecoord = this.getPositionByIndex(index, size);
-                //var elid = "#" + element.id;
-                //angular.element(elid)[0].style.transform = 'translate(' + ecoord[0] + 'px,' + ecoord[1] + 'px)';
                 element[0].children[0].style.transform = 'translate('+ecoord[0]+'px,'+ecoord[1]+'px)';
             },
 
             getPositionByIndex: function (index, size) {
                 return [Math.floor(index % size) * 100, Math.floor(index / size) * 100];
+            },
+
+            isGameCompleted: function(arr){
+                for(var i=0; i<arr.length; i++){
+                    if(arr[i].id != i){
+                        return false;
+                    }
+                }
+
+                return true;
             }
         }
     });
